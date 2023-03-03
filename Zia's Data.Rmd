@@ -1,0 +1,57 @@
+---
+title: "Zia's Data"
+author: "Marina Ornelas"
+date: "2023-02-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+require(tidyverse)
+require(tigerstats)
+mydata <- read.csv(file="Zias_Data.csv")
+mydata$Scorpion_ID <- as.factor(mydata$Scorpion_ID)
+```
+
+#   Analysis of NumProbes
+
+```{r}
+boxplot(NumProbes~Scorpion_ID,data=mydata)
+```
+
+From the data above, we can tell that the scorpions that were at a higher temperature have a lower mean than those in the Low temperature. Those in the High box had a faster reaction time than those who were in the low. This allows us to see that there was less probes needed to get a reaction from the scorpions in a high temperature than the scorpions in a low temperature.
+
+```{r}
+favstats(NumProbes~Scorpion_ID,data=mydata)
+```
+
+The average for the scorpions that are in the higher temperature is 6.5 compared to those in the lower temperatures which is 23.5. This shoes us that there is a significant difference between the amount of probes needed to get a defensive sting from the scorpions.
+
+```{r}
+t.test(NumProbes~Scorpion_ID,data=mydata)
+```
+
+At the 95% confidence level,you would conclude there is not a difference between the scorpions that were placed in a lower versus a higher temperature.
+
+#   Analysis of TimeSting
+```{r}
+boxplot(TimeSting~Scorpion_ID,data=mydata)
+```
+
+The data from above shows that the "Low" box was plotted higher than that of the "High". This tells us that it took less time for the scorpions in higher temperatures to sting compared to those in low temperatures. 
+
+```{r}
+favstats(TimeSting~Scorpion_ID,data=mydata)
+```
+
+The scorpions placed in higher temperature took less time to sting compared to those in lower temperatures. There's a difference in the mean, standard deviation, and the median showed in the numerical results.
+
+```{r}
+t.test(TimeSting~Scorpion_ID,data=mydata,conf.level=.99)
+```
+
+At the 90% confidence level, you would conclude there is a difference between the scorpions that were placed in a lower versus a higher temperature.
+
